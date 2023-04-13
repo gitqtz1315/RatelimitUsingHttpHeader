@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+
+application:
+  reload :
+    file : "D:\\03.src\\spiring-zuul3\\src\\main\\resources\\application-zuul.yml"
+
+
+
+spring:
+  redis:
+    host: localhost
+    password: 123456
+    port: 6379
+    ttl: 30
+  profiles:
+    active: zuul, test
+#    sentinel:
+#      master: mymaster
+#      nodes: ['118.33.122.28:26379','118.33.122.28:26379','118.33.122.28:26379']
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, beans, refresh
+      base-path: /management
