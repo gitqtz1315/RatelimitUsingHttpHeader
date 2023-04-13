@@ -1,0 +1,8 @@
+prefix1:
+  - name: foo
+    value: 1
+  - name: bar
+    value: 2
+prefix2:
+  - name: baz
+    value: 3

@@ -1,0 +1,32 @@
+
+firstName: "John"
+
+
+zuul:
+  prefix: /api
+  routes:
+    greeting-service:
+      path: /greeting/**
+      url: forward:/greeting
+    foos-service:
+      path: /foos/**
+      url: http://localhost:8081/spring-zuul-foos-resource/foos
+
+  ratelimit:
+    enabled: true
+    repository: BUCKET4J_HAZELCAST
+#    repository: REDIS
+    policy-list:
+      greeting-service:
+        - limit: 1
+          refresh-interval: 20
+          type:
+            - http_header=X-KM-User-AspId:0001
+           # - http_header=Connection
+
+      foos-service:
+        - limit: 20
+          refresh-interval: 2
+          type:
+            - http_header=X-KM-User-AspId:0002
+  strip-prefix: true
